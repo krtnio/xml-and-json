@@ -1,8 +1,9 @@
 {
   "name": "xml-and-json",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Browser module to convert XML to JSON and vice versa",
-  "main": "src/index.js",
+  "main": "xml2json.js",
+  "module": "src/xml-and-json.js",
   "repository": "https://github.com/krtnio/xml-and-json.git",
   "author": "Nikita Khomyakov <dr.evil@krtn.eu>",
   "license": "MIT",
@@ -12,6 +13,9 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-plugin-transform-es2015-modules-umd": "^6.24.1"
+    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
+    "karma": "^2.0.0",
+    "karma-chai": "^0.1.0",
+    "mocha": "^5.0.0"
   }
 }
