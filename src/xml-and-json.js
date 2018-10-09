@@ -1,16 +1,24 @@
+const TextName = "#text";
+const CommentName = "#comment";
+const CDataName = "#cdata-section";
+const WhitespaceName = "#whitespace";
+const SignificantWhitespaceName = "#significant-whitespace";
+const DeclarationName = "?xml";
+const JsonNamespaceUri = "http://james.newtonking.com/projects/json";
+
 function isSpacing (node) {
   return node.nodeType === 3 && node.nodeValue.trim() === ''
 }
 
 export function xmlToJson (xml) {
   // Create the return object
-  var obj = {}
+  let obj = {}
 
   if (xml.nodeType === 1) { // element
     // do attributes
     if (xml.attributes.length > 0) {
       for (let j = 0; j < xml.attributes.length; j++) {
-        var attribute = xml.attributes.item(j)
+        const attribute = xml.attributes.item(j)
         obj['@' + attribute.nodeName] = attribute.nodeValue
       }
     }
@@ -21,12 +29,12 @@ export function xmlToJson (xml) {
   // do children
   if (xml.hasChildNodes()) {
     for (var i = 0; i < xml.childNodes.length; i++) {
-      var item = xml.childNodes.item(i)
+      const item = xml.childNodes.item(i)
 
       if ([1, 3].indexOf(item.nodeType) === -1) continue
       if (isSpacing(item)) continue
 
-      var nodeName = item.nodeName
+      const nodeName = item.nodeName
 
       if (typeof obj[nodeName] === 'undefined') {
         obj[nodeName] = xmlToJson(item)
@@ -42,8 +50,8 @@ export function xmlToJson (xml) {
     }
   }
 
-  var keys = Object.keys(obj)
-  if(keys.length === 1 && keys[0] === '#text') obj = obj['#text']
+  const keys = Object.keys(obj)
+  if(keys.length === 1 && keys[0] === TextName) obj = obj[TextName]
 
   return obj
 }
